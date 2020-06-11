@@ -5,9 +5,10 @@ let isNum = function (n){
 const game = function(){
     const randomNum = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
     let count = 10;
-
+    alert('Угадайте число от 1 до 100!');
     return function repeatPlay() {
-        let num = prompt('Угадайте число от 1 до 100!');
+        
+        let num = prompt('Угадайте число');
         if (isNum(num)) {
             let userNumber = +num;
             count --;
