@@ -5,10 +5,8 @@ let isNumber = function (n){
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-let number = randomInt(1, 100);
-console.log(number);
-
-let userNum;
+let count = 10;
+let number;
 
 function guess(str){
     userNum = prompt(str);
@@ -21,10 +19,9 @@ function guess(str){
         }
     }
 }
-guess('Угадай число от 1 до 100');
-let count = 10;
 
-let start = function(){
+
+let game = function(){
     count--;
     function adjustment(n){
         if (count > 0){
@@ -51,18 +48,30 @@ let start = function(){
         } else {
             window.location.reload();
             return;
-            
         }
-        
     }
     else if (res == null){
         return alert ('Вы отменили игру');
     }
     else if (!res){
         let res = adjustment(userNum);
-        start();
+        game();
     } else{
-        return alert('вы выиграли');
+        if (!confirm('Вы выиграли!!! Хотите сыграть еще?')){
+            return;
+        } else {
+            window.location.reload();
+            return;
+        }
     }
 };
-start();
+
+const startGame = function (){
+    number = randomInt(1, 100);
+    console.log(number);
+    guess('Угадай число от 1 до 100');
+
+    let userNum;
+    game();
+};
+startGame();
