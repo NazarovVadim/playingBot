@@ -22,26 +22,43 @@ function guess(str){
     }
 }
 guess('Угадай число от 1 до 100');
+let count = 10;
 
 let start = function(){
+    count--;
     function adjustment(n){
-        if (n == null){
-            return null;
-        } else if (n > number){
-            guess('меньше!');
-            return false;
-        } else if (n < number){
-            guess('больше!');
-            return false;
-        } else if (n == number){
-            return true;
+        if (count > 0){
+            if (n == null){
+                return null;
+            } else if (n > number){
+                guess('меньше! (осталось ' + count + ' попток)');
+                return false;
+            } else if (n < number){
+                guess('больше! (осталось ' + count + ' попток)');
+                return false;
+            } else if (n == number){
+                return true;
+            }
+        } else {
+            return '-1';
         }
     }
     let res = adjustment(userNum);
-    if (res == null){
+    count--;
+    if (res === '-1'){
+        if (!confirm('Ваши попытки закончились. Хотите сыграть еще?')){
+            return;
+        } else {
+            window.location.reload();
+            return;
+            
+        }
+        
+    }
+    else if (res == null){
         return alert ('Вы отменили игру');
     }
-    if (!res){
+    else if (!res){
         let res = adjustment(userNum);
         start();
     } else{
